@@ -1,0 +1,27 @@
+# build dross
+Makefile
+Makefile.in
+tests/Makefile
+tests/Makefile.in
+src/.deps/
+src/Makefile
+src/Makefile.in
+aclocal.m4
+autom4te.cache/
+build-aux/
+config.h
+config.h.in
+config.log
+config.status
+configure
+libtool
+m4/
+stamp-h1
+
+# compile dross
+src/main.o
+src/peek
+src/peek.o
+
+# test dross
+tests/testfile*
