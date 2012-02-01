@@ -1,3 +1,5 @@
 SUBDIRS=src tests
 
 MAINTAINERCLEANFILES=Makefile.in
+
+ACLOCAL_AMFLAGS=-I m4

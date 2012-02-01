@@ -1,78 +1,95 @@
-2009-04-03  Mark Sangster  <znxster@gmail.com>
+2011-12-06  Mark Sangster  <znxster@gmail.com>
+	* tests/Zoo.sh, configure.ac: Search for unzoo as well
 
+2011-05-10  Mark Sangster  <znxster@gmail.com>
+	* :Some systems have gzip masq as compress
+	* :HAVE_SETENV not HAS_
+
+2010-05-20  Mark Sangster  <znxster@gmail.com>
+	* :Solaris version of m4 won't make directory on the fly
+
+2010-05-13  Mark Sangster  <znxster@gmail.com>
+	* :Use an m4 directory and ignore its contents
+	* :ignore m4 dir
+	* :Constant char
+	* :Also look for unrar tool
+	* :Updated GNU install file
+
+2009-11-02  Mark Sangster  <znxster@gmail.com>
+	* :Whitespace
+
+2009-10-30  Mark Sangster  <znxster@gmail.com>
+	* :New INSTALL
+
+2009-04-09  Mark Sangster  <znxster@gmail.com>
+	* :Make tidy a little stricter
+
+2009-04-08  Mark Sangster  <znxster@gmail.com>
+	* Release 0.0.3
+
+2009-04-04  Mark Sangster  <znxster@gmail.com>
+	* INSTALL: New version of INSTALL
+	* tests/Makefile.am: Using * didn't indicate the XFAILS properly
+
+2009-04-03  Mark Sangster  <znxster@gmail.com>
 	* configure.ac, tests/{Makefile.am,Zzip.sh}, src/peek.{c,h}pp: Addition of
 	Rzip support.
 
 2009-02-12  Mark Sangster  <znxster@gmail.com>
-
 	* configure.ac, tests/{Makefile.am,Zzip.sh}, src/peek.{c,h}pp: Addition of
 	Zzip support.
 
 2008-07-04  Mark Sangster  <znxster@gmail.com>
-
 	* configure.ac, tests/Makefile.am, tests/Xar.sh, src/peek.{c,h}pp:
 	Addition of Xar support
 	* peek.cpp (Show): Now indicates what is required to peek into the file.
 	* test/Makefile.am: Forgot to check for Lha
 
 2008-07-02  Mark Sangster  <znxster@gmail.com>
-
 	* configure.ac, tests/Makefile.am tests/Lzop.sh src/peek.{c,h}pp: Addition
 	of Lzop and Lha support.
 
 2008-07-01  Mark Sangster  <znxster@gmail.com>
-
 	* configure.ac, tests/Makefile.am, tests/{Cpio,7z,Ar}.sh src/peek.{c,h}pp:
 	Additon of CPIO archive and additional check for alternative 7z name. Also
 	the addition AR archive.
 
 2008-06-19  Mark Sangster  <znxster@gmail.com>
-
-    * configure.ac, tests/Makefile.am: Mark tests that should fail.
+	* configure.ac, tests/Makefile.am: Mark tests that should fail.
 	* 0.0.2 Release
 
 2008-02-10  Mark Sangster  <znxster@gmail.com>
-
-    * peek.cpp: Removed checkTool()
-    * configure.ac: Added some information when configure finished about what
-    support is available.
+	* peek.cpp: Removed checkTool()
+	* configure.ac: Added some information when configure finished about
+	what support is available.
 
 2008-01-29  Mark Sangster  <znxster@gmail.com>
-
-    * configure.ac, Makefile.am et al: Addition of autotools.
+	* configure.ac, Makefile.am et al: Addition of autotools.
 
 2008-01-25  Mark Sangster  <znxster@gmail.com>
-
-    * main.cpp: Fixed empty environmental bugs.
-    * main.cpp [SOLARIS]: Addition of putenv for Solaris.
+	* main.cpp: Fixed empty environmental bugs.
+	* main.cpp [SOLARIS]: Addition of putenv for Solaris.
 
 2008-01-22  Mark Sangster  <znxster@gmail.com>
-
-    * main.cpp: Fixed bugs with empty PAGER environmental variable.
-    * peek.cpp (checkTool): Now quits if checkTool fails.
+	* main.cpp: Fixed bugs with empty PAGER environmental variable.
+	* peek.cpp (checkTool): Now quits if checkTool fails.
 
 2007-09-30  Mark Sangster  <znxster@gmail.com>
-
-    * peek.cpp: Addition of compress support.
+	* peek.cpp: Addition of compress support.
 
 2007-09-15  Mark Sangster  <znxster@gmail.com>
-
-    * peek.cpp: Additon of ace and arj support
+	* peek.cpp: Additon of ace and arj support
 
 2007-03-25  Mark Sangster  <znxster@gmail.com>
-
-    * peek.cpp: Addition of zoo support. Rar needed HOME to be set
+	* peek.cpp: Addition of zoo support. Rar needed HOME to be set
 
 2007-03-19  Mark Sangster  <znxster@gmail.com>
-
-    * peek.cpp: Additions to check tool existance (thanks to moveax for the
-    patch). Confirms file existance, secures the environment a bit more.
-
-2007-03-17  Mark Sangster  <znxster@gmail.com>
-
-    * main.cpp, peek.cpp: Addition of PAGER usage (thanks to P38 for idea).
+	* peek.cpp: Additions to check tool existance (thanks to moveax for
+	the patch). Confirms file existance, secures the environment a bit
+	more.
 
 2007-03-17  Mark Sangster  <znxster@gmail.com>
+	* main.cpp, peek.cpp: Addition of PAGER usage (thanks to P38 for idea).
 
-    * main.cpp: Currently supports, tgz, gz, tbz2, bz2, rar, tar, 7z and zip
-    files.
+2007-03-17  Mark Sangster  <znxster@gmail.com>
+	* main.cpp: Currently supports, tgz, gz, tbz2, bz2, rar, tar, 7z and zip files.

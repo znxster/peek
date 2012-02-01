@@ -39,8 +39,8 @@ bool Peek::findTar() {
 // Zzip() {{{
 #ifdef ZZIP
 void Peek::Zzip() {
-	this->command = ZZIP " l "+this->fname;
-	return;
+    this->command = ZZIP " l "+this->fname;
+    return;
 }
 #endif
 // }}}
@@ -57,8 +57,8 @@ void Peek::Rzip() {
 // Ar() {{{
 #ifdef AR
 void Peek::Ar() {
-	this->command = AR " t "+this->fname;
-	return;
+    this->command = AR " t "+this->fname;
+    return;
 }
 #endif
 // }}}
@@ -66,9 +66,9 @@ void Peek::Ar() {
 // Lzop() {{{
 #ifdef LZOP
 void Peek::Lzop() {
-	// XXX: Yes lzop is this stupid
-	this->command = LZOP " -dc "+this->fname+" | cat";
-	return;
+    // XXX: Yes lzop is this stupid
+    this->command = LZOP " -dc "+this->fname+" | cat";
+    return;
 }
 #endif
 // }}}
@@ -76,8 +76,8 @@ void Peek::Lzop() {
 // Cpio() {{{
 #ifdef CPIO
 void Peek::Cpio() {
-	this->command = CPIO " -tv <"+this->fname;
-	return;
+    this->command = CPIO " -tv <"+this->fname;
+    return;
 }
 #endif
 // }}}
@@ -192,8 +192,8 @@ void Peek::Zip() {
 // Lha() {{{
 #ifdef LHA
 void Peek::Lha() {
-	this->command = LHA " l "+this->fname;
-	return;
+    this->command = LHA " l "+this->fname;
+    return;
 }
 #endif
 // }}}
@@ -201,8 +201,8 @@ void Peek::Lha() {
 // Xar() {{{
 #ifdef XAR
 void Peek::Xar() {
-	this->command = XAR " -tf "+this->fname;
-	return;
+    this->command = XAR " -tf "+this->fname;
+    return;
 }
 #endif
 // }}}
@@ -210,9 +210,9 @@ void Peek::Xar() {
 // Shar() {{{
 #ifdef SHAR
 void Peek::Shar() {
-	// XXX: Is this particular to GNU shar ?
-	this->command = "grep '^# ===' "+this->fname+" | sed 's/.*= \\(.*\\) =.*/\\1/'";
-	return;
+    // XXX: Is this particular to GNU shar ?
+    this->command = "grep '^# ===' "+this->fname+" | sed 's/.*= \\(.*\\) =.*/\\1/'";
+    return;
 }
 #endif
 // }}}
@@ -288,100 +288,100 @@ void Peek::Show() {
 #ifdef TAR
             this->Tar();
 #else
-			cerr << "peek: Please install 'tar' and rebuild to support" << endl;
+            cerr << "peek: Please install 'tar' and rebuild to support" << endl;
 #endif
             break;
         case FILE_TGZ:
 #if defined(TAR) && defined(GUNZIP)
             this->TarGz();
 #else
-			cerr << "peek: Please install 'tar' and 'gunzip' and rebuild to support" << endl;
+            cerr << "peek: Please install 'tar' and 'gunzip' and rebuild to support" << endl;
 #endif
             break;
         case FILE_TBZ2:
 #if defined(TAR) && defined(BUNZIPTWO)
             this->TarBz2();
 #else
-			cerr << "peek: Please install 'tar' and 'bunzip2' and rebuild to support" << endl;
+            cerr << "peek: Please install 'tar' and 'bunzip2' and rebuild to support" << endl;
 #endif
             break;
         case FILE_TCOMP:
 #if defined(TAR) && defined(COMPRESS)
             this->TarCompress();
 #else
-			cerr << "peek: Please install 'tar' and 'compress' and rebuild to support" << endl;
+            cerr << "peek: Please install 'tar' and 'compress' and rebuild to support" << endl;
 #endif
             break;
         case FILE_BZ2:
 #ifdef BUNZIPTWO
             this->Bz2();
 #else
-			cerr << "peek: Please install 'bunzip2' and rebuild to support" << endl;
+            cerr << "peek: Please install 'bunzip2' and rebuild to support" << endl;
 #endif
             break;
         case FILE_GZ:
 #ifdef GUNZIP
             this->Gz();
 #else
-			cerr << "peek: Please install 'gunzip' and rebuild to support" << endl;
+            cerr << "peek: Please install 'gunzip' and rebuild to support" << endl;
 #endif
             break;
         case FILE_RAR:
 #ifdef RAR
             this->Rar();
 #else
-			cerr << "peek: Please install 'rar' and rebuild to support" << endl;
+            cerr << "peek: Please install 'rar' and rebuild to support" << endl;
 #endif
             break;
         case FILE_P7ZIP:
 #ifdef SEVENZ
             this->P7Zip();
 #else
-			cerr << "peek: Please install '7z' or '7za' and rebuild to support" << endl;
+            cerr << "peek: Please install '7z' or '7za' and rebuild to support" << endl;
 #endif
             break;
         case FILE_ZIP:
 #ifdef UNZIP
             this->Zip();
 #else
-			cerr << "peek: Please install 'unzip' and rebuild to support" << endl;
+            cerr << "peek: Please install 'unzip' and rebuild to support" << endl;
 #endif
             break;
-		case FILE_LHA:
+        case FILE_LHA:
 #ifdef LHA
-			this->Lha();
+            this->Lha();
 #else
-			cerr << "peek: Please install 'lha' and rebuild to support" << endl;
+            cerr << "peek: Please install 'lha' and rebuild to support" << endl;
 #endif
-			break;
-		case FILE_XAR:
+            break;
+        case FILE_XAR:
 #ifdef XAR
-			this->Xar();
+            this->Xar();
 #else
-			cerr << "peek: Please install 'xar' and rebuild to support" << endl;
+            cerr << "peek: Please install 'xar' and rebuild to support" << endl;
 #endif
-			break;
-		case FILE_SHAR:
+            break;
+        case FILE_SHAR:
 #ifdef SHAR
-			this->Shar();
+            this->Shar();
 #else
-			cerr << "peek: Please install 'shar' and rebuild to support" << endl;
+            cerr << "peek: Please install 'shar' and rebuild to support" << endl;
 #endif
-			break;
+            break;
         case FILE_ZOO:
 #ifdef ZOO
             this->Zoo();
 #else
-			cerr << "peek: Please install 'zoo' and rebuild to support" << endl;
+            cerr << "peek: Please install 'zoo' and rebuild to support" << endl;
 #endif
             break;
-		case FILE_AR:
+        case FILE_AR:
 #ifdef AR
-			this->Ar();
+            this->Ar();
 #else
-			cerr << "peek: Please install 'ar' and rebuild to support" << endl;
+            cerr << "peek: Please install 'ar' and rebuild to support" << endl;
 #endif
-			break;
+            break;
     case FILE_RZIP:
 #ifdef RZIP
       this->Rzip();
@@ -389,46 +389,46 @@ void Peek::Show() {
       cerr << "peek: Please install 'rzip' and rebuild to support" << endl;
 #endif
       break;
-		case FILE_ZZIP:
+        case FILE_ZZIP:
 #ifdef ZZIP
-			this->Zzip();
+            this->Zzip();
 #else
-			cerr << "peek: Please install 'zzip' or 'zzip.exe' and rebuild to support" << endl;
+            cerr << "peek: Please install 'zzip' or 'zzip.exe' and rebuild to support" << endl;
 #endif
-			break;
-		case FILE_CPIO:
+            break;
+        case FILE_CPIO:
 #ifdef CPIO
-			this->Cpio();
+            this->Cpio();
 #else
-			cerr << "peek: Please install 'cpio' and rebuild to support" << endl;
+            cerr << "peek: Please install 'cpio' and rebuild to support" << endl;
 #endif
-			break;
-		case FILE_LZO:
+            break;
+        case FILE_LZO:
 #ifdef LZOP
-			this->Lzop();
+            this->Lzop();
 #else
-			cerr << "peek: Please install 'lzop' and rebuild to support" << endl;
+            cerr << "peek: Please install 'lzop' and rebuild to support" << endl;
 #endif
-			break;
+            break;
         case FILE_ARJ:
 #ifdef ARJ
             this->Arj();
 #else
-			cerr << "peek: Please install 'arj' and rebuild to support" << endl;
+            cerr << "peek: Please install 'arj' and rebuild to support" << endl;
 #endif
             break;
         case FILE_ACE:
 #ifdef ACE
             this->Ace();
 #else
-			cerr << "peek: Please install 'unace' and rebuild to support" << endl;
+            cerr << "peek: Please install 'unace' and rebuild to support" << endl;
 #endif
             break;
         case FILE_COMP:
 #ifdef COMPRESS
             this->Compress();
 #else
-			cerr << "peek: Please install 'compress' and rebuild to support" << endl;
+            cerr << "peek: Please install 'compress' and rebuild to support" << endl;
 #endif
             break;
         default:

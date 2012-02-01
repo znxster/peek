@@ -11,6 +11,7 @@ AC_PREREQ(2.59)
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE
 
 dnl Checks for programs.
@@ -67,6 +68,12 @@ AC_PATH_PROG(RAR_PATH, rar)
 if test "$RAR_PATH" != ""
 then
     AC_DEFINE_UNQUOTED(RAR, "$RAR_PATH", [Path to rar program])
+else
+    AC_PATH_PROG(RAR_PATH, unrar)
+    if test "$RAR_PATH" != ""
+    then
+        AC_DEFINE_UNQUOTED(RAR, "$RAR_PATH", [Path to unrar program])
+    fi
 fi
 AM_CONDITIONAL(TRAR, test "$RAR_PATH" == "")
 AC_PATH_PROG(SEVENZ_PATH, 7z)
@@ -85,6 +92,12 @@ AC_PATH_PROG(ZOO_PATH, zoo)
 if test "$ZOO_PATH" != ""
 then
     AC_DEFINE_UNQUOTED(ZOO, "$ZOO_PATH", [Path to zoo program])
+else
+	AC_PATH_PROG(ZOO_PATH, unzoo)
+	if test "$ZOO_PATH" != ""
+	then
+		AC_DEFINE_UNQUOTED(ZOO, "$ZOO_PATH", [Path to unzoo program])
+	fi
 fi
 AM_CONDITIONAL(TZOO, test "$ZOO_PATH" == "")
 AC_PATH_PROG(TAR_PATH, tar)

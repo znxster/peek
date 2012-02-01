@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     Peek *peek = new Peek();
 
     /* extract, cleanse and rebuild environment */
-    char *ePAGER, *eTERM, *eHOME, *eTZ;
+    const char *ePAGER, *eTERM, *eHOME, *eTZ;
     ePAGER = getenv("PAGER");
     if(ePAGER==NULL)
         ePAGER = "more";
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
     if(eTZ==NULL)
         eTZ="C";
 
-#ifdef HAS_SETENV
+#ifdef HAVE_SETENV
     setenv("PATH","/bin:/usr/bin:/usr/local/bin:/opt/bin",0);
     setenv("IFS","\t\n",0);
     setenv("PAGER",ePAGER,0);

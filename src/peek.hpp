@@ -28,9 +28,9 @@ using namespace std;
 
 enum Type {
     UNK,
-		FILE_TGZ, FILE_GZ, FILE_TBZ2, FILE_BZ2, FILE_RAR, FILE_TAR, FILE_P7ZIP,
-		FILE_ZIP, FILE_ZOO, FILE_ARJ, FILE_ACE, FILE_TCOMP, FILE_COMP, FILE_CPIO,
-		FILE_AR, FILE_LZO, FILE_LHA, FILE_XAR, FILE_SHAR, FILE_ZZIP, FILE_RZIP
+        FILE_TGZ, FILE_GZ, FILE_TBZ2, FILE_BZ2, FILE_RAR, FILE_TAR, FILE_P7ZIP,
+        FILE_ZIP, FILE_ZOO, FILE_ARJ, FILE_ACE, FILE_TCOMP, FILE_COMP, FILE_CPIO,
+        FILE_AR, FILE_LZO, FILE_LHA, FILE_XAR, FILE_SHAR, FILE_ZZIP, FILE_RZIP
 };
 
 static map<string, Type> fexts;
@@ -52,16 +52,16 @@ private:
     void Rzip(void);
 #endif
 #ifdef ZZIP
-		void Zzip(void);
+    void Zzip(void);
 #endif
 #ifdef AR
-	void Ar(void);
+    void Ar(void);
 #endif
 #ifdef CPIO
-	void Cpio(void);
+    void Cpio(void);
 #endif
 #ifdef LZOP
-	void Lzop(void);
+    void Lzop(void);
 #endif
 #ifdef ARJ
     void Arj(void);
@@ -94,13 +94,13 @@ private:
     void Tar(void);
 #endif
 #ifdef LHA
-	void Lha(void);
+    void Lha(void);
 #endif
 #ifdef XAR
-	void Xar(void);
+    void Xar(void);
 #endif
 #ifdef SHAR
-	void Shar(void);
+    void Shar(void);
 #endif
 #ifdef ZOO
     void Zoo(void);

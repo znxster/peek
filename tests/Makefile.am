@@ -63,4 +63,4 @@ XFAIL_TESTS += $(srcdir)/Rzip.sh
 endif
 
 MAINTAINERCLEANFILES=Makefile.in
-CLEANFILES=testfile*
+CLEANFILES=testfile testfile.*
