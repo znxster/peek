@@ -1,3 +1,3 @@
-( zoo -add testfile.zoo ../src/*.* >/dev/null 2>&1 && \
-    ../src/peek testfile.zoo >/dev/null && \
-    rm -f testfile.zoo ) || exit 1
+( zoo -add testfile.zoo ../src/*.* && \
+    ../src/peek testfile.zoo && \
+    rm -f testfile.zoo ) >/dev/null 2>&1 || exit 1

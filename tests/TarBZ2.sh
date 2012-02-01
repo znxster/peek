@@ -1,4 +1,4 @@
-( tar -jcf testfile.tar.bz2 ../src/*.* 2>/dev/null && \
+( tar -jcf testfile.tar.bz2 ../src/*.* && \
     cp testfile.tar.bz2 testfile.tbz2 && \
-    ../src/peek testfile.tar.bz2 testfile.tbz2 >/dev/null && \
-    rm -f testfile.tbz2 testfile.tar.bz2 ) || exit 1
+    ../src/peek testfile.tar.bz2 testfile.tbz2 && \
+    rm -f testfile.tbz2 testfile.tar.bz2 ) >/dev/null 2>&1 || exit 1

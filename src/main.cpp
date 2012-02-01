@@ -24,15 +24,17 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <cstring>
 #include "peek.hpp"
 #include "config.h"
+
 using namespace std;
 
 // Setup static strings for information {{{
 const string ReleaseDate = "2008/02/10";
 const string SupportedTypes = ("\
-Currently supports, tgz, gz, tbz2, bz2, rar, tar, 7z, zip, zoo, arj,\n\
-ace, Z and tar.Z files.\n");
+Currently supports multiple types of compressed files and archives.\n");
 
 static const string Notice = ("\
 Peek comes with ABSOLUTELY NO WARRANTY; for details type `peek -vv'.\n\
@@ -128,7 +130,6 @@ int main(int argc, char *argv[]) {
     strcpy(s,"TZ=");
     strcat(s,eTZ);
     putenv(s);
-    strcpy(s,"TZ=");
 #endif
     
     /* check we aren't running with privileges */

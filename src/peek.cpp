@@ -19,6 +19,7 @@
  */
 
 #include <iostream>
+#include <cstdlib>
 #include "peek.hpp"
 #include "config.h"
 using namespace std;
@@ -31,6 +32,52 @@ bool Peek::findTar() {
         return true;
     else
         return false;
+}
+#endif
+// }}}
+
+// Zzip() {{{
+#ifdef ZZIP
+void Peek::Zzip() {
+	this->command = ZZIP " l "+this->fname;
+	return;
+}
+#endif
+// }}}
+
+// Rzip() {{{
+#ifdef RZIP
+void Peek::Rzip() {
+  this->command = RZIP " -d "+this->fname;
+  return;
+}
+#endif
+// }}}
+
+// Ar() {{{
+#ifdef AR
+void Peek::Ar() {
+	this->command = AR " t "+this->fname;
+	return;
+}
+#endif
+// }}}
+
+// Lzop() {{{
+#ifdef LZOP
+void Peek::Lzop() {
+	// XXX: Yes lzop is this stupid
+	this->command = LZOP " -dc "+this->fname+" | cat";
+	return;
+}
+#endif
+// }}}
+
+// Cpio() {{{
+#ifdef CPIO
+void Peek::Cpio() {
+	this->command = CPIO " -tv <"+this->fname;
+	return;
 }
 #endif
 // }}}
@@ -56,7 +103,7 @@ void Peek::Ace() {
 // Compress() {{{
 #ifdef COMPRESS
 void Peek::Compress() {
-    this->command = "compress -d -c "+this->fname;
+    this->command = COMPRESS " -d -c "+this->fname;
     return;
 }
 #endif
@@ -76,7 +123,7 @@ void Peek::TarCompress() {
 // Gz() {{{
 #ifdef GUNZIP
 void Peek::Gz() {
-    this->command = "gunzip < "+this->fname;
+    this->command = GUNZIP " < "+this->fname;
     return;
 }
 #endif
@@ -118,7 +165,7 @@ void Peek::TarBz2() {
 // Rar() {{{
 #ifdef RAR
 void Peek::Rar() {
-    this->command = "rar l "+this->fname;
+    this->command = RAR " l "+this->fname;
     return;
 }
 #endif
@@ -127,7 +174,7 @@ void Peek::Rar() {
 // P7Zip() {{{
 #ifdef SEVENZ
 void Peek::P7Zip() {
-    this->command = "7z l "+this->fname;
+    this->command = SEVENZ " l "+this->fname;
     return;
 }
 #endif
@@ -142,10 +189,38 @@ void Peek::Zip() {
 #endif
 // }}}
 
+// Lha() {{{
+#ifdef LHA
+void Peek::Lha() {
+	this->command = LHA " l "+this->fname;
+	return;
+}
+#endif
+// }}}
+
+// Xar() {{{
+#ifdef XAR
+void Peek::Xar() {
+	this->command = XAR " -tf "+this->fname;
+	return;
+}
+#endif
+// }}}
+
+// Shar() {{{
+#ifdef SHAR
+void Peek::Shar() {
+	// XXX: Is this particular to GNU shar ?
+	this->command = "grep '^# ===' "+this->fname+" | sed 's/.*= \\(.*\\) =.*/\\1/'";
+	return;
+}
+#endif
+// }}}
+
 // Zoo() {{{
 #ifdef ZOO
 void Peek::Zoo() {
-    this->command = "zoo -list "+this->fname;
+    this->command = ZOO " -list "+this->fname;
     return;
 }
 #endif
@@ -155,9 +230,9 @@ void Peek::Zoo() {
 #ifdef TAR
 void Peek::Tar() {
     if(this->command != "")
-        this->command = this->command+"tar -tvf -";
+        this->command = this->command+ TAR " -tvf -";
     else
-        this->command = "tar -tvf "+this->fname;
+        this->command = TAR " -tvf "+this->fname;
     return;
 }
 #endif
@@ -165,19 +240,29 @@ void Peek::Tar() {
 
 // Constructor {{{
 Peek::Peek() {
-    this->setPager(false);
-    fexts["gz"]   = FILE_GZ;
-    fexts["bz2"]  = FILE_BZ2;
-    fexts["tgz"]  = FILE_TGZ;
-    fexts["tbz2"] = FILE_TBZ2;
-    fexts["rar"]  = FILE_RAR;
-    fexts["tar"]  = FILE_TAR;
-    fexts["7z"]   = FILE_P7ZIP;
-    fexts["zip"]  = FILE_ZIP;
-    fexts["zoo"]  = FILE_ZOO;
-    fexts["arj"]  = FILE_ARJ;
-    fexts["ace"]  = FILE_ACE;
-    fexts["Z"]    = FILE_COMP;
+  this->setPager(false);
+  fexts["cpio"] = FILE_CPIO;
+  fexts["a"]    = FILE_AR;
+  fexts["ar"]   = FILE_AR;
+  fexts["gz"]   = FILE_GZ;
+  fexts["bz2"]  = FILE_BZ2;
+  fexts["tgz"]  = FILE_TGZ;
+  fexts["tbz2"] = FILE_TBZ2;
+  fexts["rar"]  = FILE_RAR;
+  fexts["tar"]  = FILE_TAR;
+  fexts["7z"]   = FILE_P7ZIP;
+  fexts["zip"]  = FILE_ZIP;
+  fexts["zoo"]  = FILE_ZOO;
+  fexts["lha"]  = FILE_LHA;
+  fexts["lzh"]  = FILE_LHA;
+  fexts["xar"]  = FILE_XAR;
+  fexts["shar"] = FILE_SHAR;
+  fexts["arj"]  = FILE_ARJ;
+  fexts["lzo"]  = FILE_LZO;
+  fexts["ace"]  = FILE_ACE;
+  fexts["Z"]    = FILE_COMP;
+  fexts["zz"]   = FILE_ZZIP;
+  fexts["rz"]   = FILE_RZIP;
 }
 // }}}
 
@@ -199,72 +284,153 @@ void Peek::setPager(bool state) {
 // Show() {{{
 void Peek::Show() {
     switch(fexts[this->fext]) {
-#ifdef TAR
         case FILE_TAR:
+#ifdef TAR
             this->Tar();
-            break;
+#else
+			cerr << "peek: Please install 'tar' and rebuild to support" << endl;
 #endif
-#if defined(TAR) && defined(GUNZIP)
+            break;
         case FILE_TGZ:
+#if defined(TAR) && defined(GUNZIP)
             this->TarGz();
-            break;
+#else
+			cerr << "peek: Please install 'tar' and 'gunzip' and rebuild to support" << endl;
 #endif
-#if defined(TAR) && defined(BUNZIPTWO)
+            break;
         case FILE_TBZ2:
+#if defined(TAR) && defined(BUNZIPTWO)
             this->TarBz2();
-            break;
+#else
+			cerr << "peek: Please install 'tar' and 'bunzip2' and rebuild to support" << endl;
 #endif
-#if defined(TAR) && defined(COMPRESS)
+            break;
         case FILE_TCOMP:
+#if defined(TAR) && defined(COMPRESS)
             this->TarCompress();
-            break;
+#else
+			cerr << "peek: Please install 'tar' and 'compress' and rebuild to support" << endl;
 #endif
-#ifdef BUNZIPTWO
+            break;
         case FILE_BZ2:
-            cout << "got here" << endl;
+#ifdef BUNZIPTWO
             this->Bz2();
-            break;
+#else
+			cerr << "peek: Please install 'bunzip2' and rebuild to support" << endl;
 #endif
-#ifdef GUNZIP
+            break;
         case FILE_GZ:
+#ifdef GUNZIP
             this->Gz();
-            break;
+#else
+			cerr << "peek: Please install 'gunzip' and rebuild to support" << endl;
 #endif
-#ifdef RAR
+            break;
         case FILE_RAR:
+#ifdef RAR
             this->Rar();
-            break;
+#else
+			cerr << "peek: Please install 'rar' and rebuild to support" << endl;
 #endif
-#ifdef SEVENZ
+            break;
         case FILE_P7ZIP:
+#ifdef SEVENZ
             this->P7Zip();
-            break;
+#else
+			cerr << "peek: Please install '7z' or '7za' and rebuild to support" << endl;
 #endif
-#ifdef UNZIP
+            break;
         case FILE_ZIP:
+#ifdef UNZIP
             this->Zip();
-            break;
+#else
+			cerr << "peek: Please install 'unzip' and rebuild to support" << endl;
 #endif
-#ifdef ZOO
+            break;
+		case FILE_LHA:
+#ifdef LHA
+			this->Lha();
+#else
+			cerr << "peek: Please install 'lha' and rebuild to support" << endl;
+#endif
+			break;
+		case FILE_XAR:
+#ifdef XAR
+			this->Xar();
+#else
+			cerr << "peek: Please install 'xar' and rebuild to support" << endl;
+#endif
+			break;
+		case FILE_SHAR:
+#ifdef SHAR
+			this->Shar();
+#else
+			cerr << "peek: Please install 'shar' and rebuild to support" << endl;
+#endif
+			break;
         case FILE_ZOO:
+#ifdef ZOO
             this->Zoo();
-            break;
+#else
+			cerr << "peek: Please install 'zoo' and rebuild to support" << endl;
 #endif
-#ifdef ARJ
+            break;
+		case FILE_AR:
+#ifdef AR
+			this->Ar();
+#else
+			cerr << "peek: Please install 'ar' and rebuild to support" << endl;
+#endif
+			break;
+    case FILE_RZIP:
+#ifdef RZIP
+      this->Rzip();
+#else
+      cerr << "peek: Please install 'rzip' and rebuild to support" << endl;
+#endif
+      break;
+		case FILE_ZZIP:
+#ifdef ZZIP
+			this->Zzip();
+#else
+			cerr << "peek: Please install 'zzip' or 'zzip.exe' and rebuild to support" << endl;
+#endif
+			break;
+		case FILE_CPIO:
+#ifdef CPIO
+			this->Cpio();
+#else
+			cerr << "peek: Please install 'cpio' and rebuild to support" << endl;
+#endif
+			break;
+		case FILE_LZO:
+#ifdef LZOP
+			this->Lzop();
+#else
+			cerr << "peek: Please install 'lzop' and rebuild to support" << endl;
+#endif
+			break;
         case FILE_ARJ:
+#ifdef ARJ
             this->Arj();
-            break;
+#else
+			cerr << "peek: Please install 'arj' and rebuild to support" << endl;
 #endif
-#ifdef ACE
+            break;
         case FILE_ACE:
+#ifdef ACE
             this->Ace();
-            break;
+#else
+			cerr << "peek: Please install 'unace' and rebuild to support" << endl;
 #endif
-#ifdef COMPRESS
+            break;
         case FILE_COMP:
+#ifdef COMPRESS
             this->Compress();
-            break;
+#else
+			cerr << "peek: Please install 'compress' and rebuild to support" << endl;
 #endif
+            break;
         default:
             cerr << "peek: Unknown file type: " << this->fname << endl;
             exit(1);

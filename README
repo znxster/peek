@@ -1,0 +1,12 @@
+** Peek - Peeking into Archives
+
+This package contains a simple program that allows you to 'peek' into
+various types of archives from a single command. The idea behind it is
+to reduce the amount of typing required and nothing more.
+
+* Basic Install
+
+The standard: ./configure && make && make install
+
+This will place the binary in /usr/local/bin. See INSTALL for further
+instructions.

@@ -1,3 +1,3 @@
-( tar -cf testfile.tar ../src/*.* 2>/dev/null && \
-    ../src/peek testfile.tar >/dev/null && \
-    rm -f testfile.tar ) || exit 1
+( tar -cf testfile.tar ../src/*.* && \
+    ../src/peek testfile.tar && \
+    rm -f testfile.tar ) >/dev/null 2>&1 || exit 1

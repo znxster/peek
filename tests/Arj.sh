@@ -1,3 +1,3 @@
-( arj a testfile.arj ../src/*.* >/dev/null && \
-    ../src/peek testfile.arj >/dev/null && \
-    rm -f testfile.arj ) || exit 1
+( arj a testfile.arj ../src/*.* && \
+    ../src/peek testfile.arj && \
+    rm -f testfile.arj ) >/dev/null 2>&1 || exit 1
