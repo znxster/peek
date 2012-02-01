@@ -1,6 +1,6 @@
-/* peek.hpp, $Revision: 1.5 $, $Date: 2007/09/30 00:35:45 $
+/* peek.hpp, $Revision: $, $Date: $
  * 
- * Copyright (C) 2007 Mark Sangster <znxster@gmail.com>
+ * Copyright (C) 2007-2008 Mark Sangster <znxster@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -15,20 +15,25 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * $Id: peek.hpp,v 1.5 2007/09/30 00:35:45 mark Exp $
+ * $Id: $
  */
 
 #ifndef _PEEK_HH
 #define _PEEK_HH 1
 
+#include <map>
 #include <string>
+#include "config.h"
 using namespace std;
 
 enum Type {
-    TGZ,GZ,TBZ2,BZ2,RAR,TAR,P7ZIP,ZIP,ZOO,ARJ,ACE,
-    TCOMP,COMP,
-    UNK
+    UNK,
+    FILE_TGZ,FILE_GZ,FILE_TBZ2,FILE_BZ2,FILE_RAR,
+    FILE_TAR,FILE_P7ZIP,FILE_ZIP,FILE_ZOO,FILE_ARJ,
+    FILE_ACE,FILE_TCOMP,FILE_COMP
 };
+
+static map<string, Type> fexts;
 
 class Peek {
 private:
@@ -40,22 +45,42 @@ private:
     bool usePager;
     
     void Process(void);
+#ifdef TAR
     bool findTar(void);
-    bool checkTool(string);
-    
+#endif
+#ifdef ARJ
     void Arj(void);
+#endif
+#ifdef UNACE
     void Ace(void);
+#endif
+#ifdef COMPRESS
     void Compress(void);
     void TarCompress(void);
+#endif
+#ifdef GUNZIP
     void Gz(void);
-    void Bz2(void);
     void TarGz(void);
+#endif
+#ifdef BUNZIPTWO
+    void Bz2(void);
     void TarBz2(void);
+#endif
+#ifdef RAR
     void Rar(void);
+#endif
+#ifdef SEVENZ
     void P7Zip(void);
+#endif
+#ifdef UNZIP
     void Zip(void);
+#endif
+#ifdef TAR
     void Tar(void);
+#endif
+#ifdef ZOO
     void Zoo(void);
+#endif
     
 public:
     string pager;

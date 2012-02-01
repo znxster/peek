@@ -1,0 +1,20 @@
+** Peek News
+
+* Installation Changes
+
+Finally I have setup autotools and even have a rather simple testsuite
+to check that its OK. This means that the install process is now
+inline with all the other GNU styled projects.
+
+* Library Call
+
+Ultimately we will remove the reliance on the system() function
+replacing it with library calls but what did you expect for a early
+release!?
+
+* GUI?
+
+It seems rather pointless to put a GUI on the list of things todo.
+This program is purely aimed at console users allowing them quick
+access to a range of compressed files without the need of remembering
+the particular command line.

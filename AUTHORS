@@ -1,0 +1,5 @@
+Authors of Peek
+See also the files THANKS and ChangeLog
+
+Mark Sangster <znxster@gmail.com>
+    Designed and implemented main.cpp, peek.cpp and peek.hpp.
